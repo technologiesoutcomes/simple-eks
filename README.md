@@ -1,7 +1,3 @@
-# Architecture Diagram
-![Diagram](assets/architecture_diagram.png?raw=true "Architecture Diagram")
-
-
 # Configure CLI access to AWS
 
 ### Configure the user1 profile
