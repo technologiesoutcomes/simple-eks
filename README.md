@@ -1,9 +1,36 @@
-# Configure CLI access to AWS
+# Creating the EKS cluster with the Terraform code.
 
-### Configure the user1 profile
+You will be creating the EKS cluster with a user profile (default) that should 
+have adequate permissions to create the cluster. As part of the cluster creation
+the Terraform code also create an IAM user called <b>user1</b>. This user is the 
+user under which you will be administering the cluster with the kubectl tool.
+
+So, first check that your AWSCLI is configured with the default profile that 
+has the permissions to create the cluster. (~/.aws/credentials)
+
+```
+[default]
+aws_access_key_id = AKIA------------37L44
+aws_secret_access_key = QVgNZ2------------q8LnI1NzmM
+```
+
+If you are happy that the user whose keys are in the ~/.aws/credentials has the permissions, 
+proceed with creating the EKS cluster with Terraform. Change to the terraform directory and run the following commands to create the cluster.
+```
+terraform init
+terraform plan
+terraform apply
+```
+### Configure the user1 profile on the AWSCLI
+
+Log onto the AWS account where the EKS cluster has been created and navigate to IAM.
+Locate the user1 user and proceed to create its AWS access key and secrets and copy them.
+
+The run the following command to configure the AWSCLI for the user1 user
 ```
 aws configure --profile user1
 ```
+
 Upon completion of the profile the ~/.aws/credentials should look something like this;
 ```
 [default]
@@ -14,31 +41,34 @@ aws_access_key_id = AKIA----------Z457L44
 aws_secret_access_key = QWgNZ2H9x-----------8LnI1NzWM
 ```
 
-Create and delete the cluster using Terraform with you default profile
 
-### Configure role 
-** Edit the ~/.aws/config file as follows
+Now, configure role assumption so that the user1 can assume the role eks-admin.
+Edit the ~/.aws/config file as follows. Replace the placeholder with your AWS account number.
 ```
 [profile eks-admin]
 role_arn = arn:aws:iam::??????????????:role/eks-admin
 source_profile = user1
 ```
 
-### Check role assuming
+Check that you can now assume the role with the following command.
 ```
 aws sts get-caller-identity --profile eks-admin
 ```
-
-
-### Update the cluster kube config file
+You should see something like this.
 ```
-aws eks update-kubeconfig \
-  --name techoutcomes \
-  --region us-east-1 \
-  --profile eks-admin 
+{
+    "UserId": "AROA3KDCOZFY2POBFNH25:botocore-session-1691075771",
+    "Account": "?????????????",
+    "Arn": "arn:aws:sts::?????????????:assumed-role/eks-admin/botocore-session-1691075771"
+}
 ```
 
-### Connect to the cluster and check the nodes
+Update the cluster kube config file with the following command.
+```
+aws eks update-kubeconfig --name techoutcomes --region eu-west-1 --profile eks-admin 
+```
+
+Connect to the cluster and check that you can get the nodes and pods details
 ```
 kubectl get nodes
 kubectl get pods
