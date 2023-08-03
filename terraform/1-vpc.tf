@@ -1,13 +1,13 @@
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "3.14.3"
+  version = "5.1.1"
 
   name = "main"
-  cidr = "10.0.0.0/16"
+  cidr = "10.10.0.0/16"
 
-  azs             = ["us-east-1a", "us-east-1b"]
-  private_subnets = ["10.0.0.0/19", "10.0.32.0/19"]
-  public_subnets  = ["10.0.64.0/19", "10.0.96.0/19"]
+  azs             = ["eu-west-1a", "eu-west-1b"]
+  private_subnets = ["10.10.0.0/19", "10.10.32.0/19"]
+  public_subnets  = ["10.10.64.0/19", "10.10.96.0/19"]
 
   public_subnet_tags = {
     "kubernetes.io/role/elb" = "1"
