@@ -62,22 +62,24 @@ You should see something like this.
     "Arn": "arn:aws:sts::?????????????:assumed-role/eks-admin/botocore-session-1691075771"
 }
 ```
-
+(In you have not yet installed the kubectl tool, go ahead and install it)
 Update the cluster kube config file with the following command.
 ```
 aws eks update-kubeconfig --name techoutcomes --region eu-west-1 --profile eks-admin 
 ```
+(The above command will retrieve the clusters credentials and save them in the ~/.kube/config file)
 
 Connect to the cluster and check that you can get the nodes and pods details
 ```
 kubectl get nodes
 kubectl get pods
-
 ```
 
-### Deploy application
+
+
+### Deploy application - game2048 application
 ```
-kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.4.4/docs/examples/2048/2048_full.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/examples/2048/2048_full.yaml
 
 kubectl get pods -A
 
@@ -102,10 +104,13 @@ http://k8s-game2048-ingress2-4236167aae-782965586.us-east-1.elb.amazonaws.com
 
 ### Delete the application
 ```
-kubectl delete -f https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.4.4/docs/examples/2048/2048_full.yaml
+kubectl delete -f https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.5.4/docs/examples/2048/2048_full.yaml
 
 ```
 ### Delete the Terraform
 ```
 terraform destroy
 ```
+
+If it does not destroy cleanly you may have to go and finish off the deletion manually on the AWS console. Typically it will be the VPC, or an ENI or a subnet that you will have to delete manually.
+
