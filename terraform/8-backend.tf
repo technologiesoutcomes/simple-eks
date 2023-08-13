@@ -1,6 +1,6 @@
 terraform {
   backend "s3" {
-    bucket         = "technologiesoutcomes-terraform-backend"
+    bucket         = "technologiesoutcomes-??????-terraform-backend"
     encrypt        = true
     key            = "eks/simpleeks-terraform.tfstate"
     region         = "eu-west-1"

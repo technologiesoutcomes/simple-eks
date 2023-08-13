@@ -43,7 +43,7 @@ aws_secret_access_key = QWgNZ2H9x-----------8LnI1NzWM
 
 
 Now, configure role assumption so that the user1 can assume the role eks-admin.
-Edit the ~/.aws/config file as follows. Replace the placeholder with your AWS account number.
+Edit the ~/.aws/config file as follows. Replace the placeholder ?????????????? with your AWS account number.
 ```
 [profile eks-admin]
 role_arn = arn:aws:iam::??????????????:role/eks-admin
@@ -62,7 +62,12 @@ You should see something like this.
     "Arn": "arn:aws:sts::?????????????:assumed-role/eks-admin/botocore-session-1691075771"
 }
 ```
-(In you have not yet installed the kubectl tool, go ahead and install it)
+(If you have not yet installed the kubectl tool, go ahead and install it)
+Check the location of the kubectl config file 
+```
+ls -l ~/.kube/
+```
+
 Update the cluster kube config file with the following command.
 ```
 aws eks update-kubeconfig --name techoutcomes --region eu-west-1 --profile eks-admin 
@@ -114,3 +119,15 @@ terraform destroy
 
 If it does not destroy cleanly you may have to go and finish off the deletion manually on the AWS console. Typically it will be the VPC, or an ENI or a subnet that you will have to delete manually.
 
+====================================================================
+
+[default]
+aws_access_key_id = AKIA------------37L44
+aws_secret_access_key = QVgNZ2------------q8LnI1NzmM
+[esther]
+aws_access_key_id = AKIA----------Z457L44
+aws_secret_access_key = QWgNZ2H9x-----------8LnI1NzWM
+
+[profile eks-admin]
+role_arn = arn:aws:iam::??????????????:role/eks-admin
+source_profile = esther

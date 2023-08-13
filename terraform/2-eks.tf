@@ -21,7 +21,7 @@ module "eks" {
     general = {
       desired_size = 1
       min_size     = 1
-      max_size     = 10
+      max_size     = 5
 
       labels = {
         role = "general"
@@ -34,7 +34,7 @@ module "eks" {
     spot = {
       desired_size = 1
       min_size     = 1
-      max_size     = 10
+      max_size     = 5
 
       labels = {
         role = "spot"
@@ -59,6 +59,65 @@ module "eks" {
       groups   = ["system:masters"]
     },
   ]
+
+  aws_auth_users = [
+      {
+        userarn  = "arn:aws:iam::777595570545:user/ekstestuser"
+        username = "ekstestuser"
+        groups   = ["ekstestuser"]
+      },
+      {
+        userarn  = "arn:aws:iam::777595570545:user/moules"
+        username = "moules"
+        groups   = ["moules"]
+      },
+      {
+        userarn  = "arn:aws:iam::777595570545:user/estherdag"
+        username = "estherdag"
+        groups   = ["estherdag"]
+      },
+      {
+        userarn  = "arn:aws:iam::777595570545:user/sunny"
+        username = "sunny"
+        groups   = ["sunny"]
+      },
+      {
+        userarn  = "arn:aws:iam::777595570545:user/emmanuella"
+        username = "emmanuella"
+        groups   = ["emmanuella"]
+      },
+      {
+        userarn  = "arn:aws:iam::777595570545:user/arsene"
+        username = "arsene"
+        groups   = ["arsene"]
+      },
+      {
+        userarn  = "arn:aws:iam::777595570545:user/madam"
+        username = "madam"
+        groups   = ["madam"]
+      },
+      {
+        userarn  = "arn:aws:iam::777595570545:user/derick"
+        username = "derick"
+        groups   = ["derick"]
+      },
+      {
+        userarn  = "arn:aws:iam::777595570545:user/anis"
+        username = "anis"
+        groups   = ["anis"]
+      },
+      {
+        userarn  = "arn:aws:iam::777595570545:user/zoh"
+        username = "zoh"
+        groups   = ["zoh"]
+      },
+      {
+        userarn  = "arn:aws:iam::777595570545:user/christiana"
+        username = "christiana"
+        groups   = ["christiana"]
+      },
+    ]
+
 
   node_security_group_additional_rules = {
     ingress_allow_access_from_control_plane = {
