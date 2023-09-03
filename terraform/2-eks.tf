@@ -51,6 +51,8 @@ module "eks" {
     }
   }
 
+
+
   manage_aws_auth_configmap = true
   aws_auth_roles = [
     {
@@ -58,9 +60,18 @@ module "eks" {
       username = module.eks_admins_iam_role.iam_role_name
       groups   = ["system:masters"]
     },
+    {
+      rolearn  = "arn:aws:iam::777595570545:role/eks-admin"
+      username = "estherdagk8s"
+      groups   = ["system:masters"]
+    },
   ]
-
   aws_auth_users = [
+      {
+        userarn  = "arn:aws:iam::777595570545:user/eksadmin"
+        username = "eksadmin"
+        groups   = ["system:masters"]
+      },
       {
         userarn  = "arn:aws:iam::777595570545:user/ekstestuser"
         username = "ekstestuser"
@@ -73,7 +84,7 @@ module "eks" {
       },
       {
         userarn  = "arn:aws:iam::777595570545:user/estherdag"
-        username = "estherdag"
+        username = "estherdagk8s"
         groups   = ["estherdag"]
       },
       {
