@@ -53,7 +53,7 @@ source_profile = user1
 Check that you can now assume the role with the following command.
 ```
 aws sts get-caller-identity --profile eks-admin
-aws sts get-caller-identity --profile eksadmin
+
 ```
 You should see something like this.
 ```
@@ -71,7 +71,7 @@ ls -l ~/.kube/
 
 Update the cluster kube config file with the following command.
 ```
-aws eks update-kubeconfig --name techoutcomes --region eu-west-1 --profile eksadmin 
+aws eks update-kubeconfig --name techoutcomes --region eu-west-1 --profile eks-admin 
 ```
 (The above command will retrieve the clusters credentials and save them in the ~/.kube/config file)
 
