@@ -15,7 +15,9 @@ kubectl get pod multi-container -o wide
 kubectl get pod multi-container -o wide -n ????-multi-container
 kubectl get pod multi-container -o yaml -n ????-multi-container
 ```
-===================================================================================================
+########
+
+
 ```
 kubectl create namespace ????-pod2pod
 
